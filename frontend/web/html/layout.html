@@ -1,0 +1,65 @@
+{{define "base"}}
+<!doctype html>
+<html lang='en'>
+    <head>
+        <meta charset='utf-8'>
+        <title>{{template "title" .}}</title>
+        <link rel='stylesheet' href='/static/css/style.css'>
+        <link rel='shortcut icon' href='/static/img/favicon.ico' type='image/x-icon'>
+    </head>
+    
+    <body>
+        <header>
+            <h1><a href='/home'>Online school</a></h1>
+        </header>
+        <nav>
+            <ul>
+                <li>
+                    <a href='/home'>Домашняя страница</a>
+                </li>
+                {{if .Navigation.Tables}}
+                <li>
+                    <a href='/home'>Таблицы</a>
+                    <ul>
+                        {{range .Navigation.Tables}}
+                        <li>
+                            <a href="/tables/{{ .}}">{{ .}}</a>
+                        </li>
+                        {{end}}
+                    </ul>
+                </li>
+                {{end}}
+                {{if .Navigation.Views}}
+                <li>
+                    <a href='/home'>Представления</a>
+                    <ul>
+                        {{range .Navigation.Views}}
+                        <li>
+                            <a href="/views/{{ .}}">{{ .}}</a>
+                        </li>
+                        {{end}}
+                    </ul>
+                </li>
+                {{end}}
+                {{if .Navigation.Procedures}}
+                <li>
+                    <a href='/home'>Процедуры</a>
+                    <ul>
+                        {{range .Navigation.Procedures}}
+                        <li>
+                            <a href="/procedures/{{ .}}">{{ .}}</a>
+                        </li>
+                        {{end}}
+                    </ul>
+                </li>
+                {{end}}
+            </ul>
+        </nav>
+        
+        <main>
+            {{template "main" .}}
+        </main>
+        {{template "footer" .}}
+    </body>
+</html>
+{{end}}

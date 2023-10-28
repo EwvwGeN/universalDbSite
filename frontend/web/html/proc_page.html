@@ -1,0 +1,21 @@
+{{template "base" .}}
+
+{{define "title"}}{{ .Page_title}}{{end}}
+ 
+{{define "main"}}
+{{$title := .Page_title}}
+<div>
+    {{if .Procedure.Param}}
+    <h3>Procedure {{$title}}</h3>
+    <form method="POST">
+        {{range $idx, $v := .Procedure.Param}}
+        <label>{{$v}}</label>
+        <input type="text" name="col_{{$idx}}"/>
+        {{end}}
+        <input type="submit" value="Send" />
+    </form>
+    {{else}}
+        <p>Здесь ничего нет... пока что!</p>
+    {{end}}
+</div>
+{{end}}

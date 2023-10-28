@@ -1,0 +1,29 @@
+{{template "base" .}}
+
+{{define "title"}}{{ .Page_title}}{{end}}
+ 
+{{define "main"}}
+{{$title := .Page_title}}
+<div>
+    {{if .Record.Data}}
+    {{$columns := .Record.Columns}}
+    {{$pk := .Record.PkCol}}
+    <h3>Update record from {{$title}}</h3>
+    <form method="POST">
+        {{range $idx, $v := .Record.Data}}
+        <label>{{index $columns $idx}}</label>
+        {{if index $pk $idx}}
+        <label>{{$v}}</label><br>
+        <input type="hidden" name="col_{{$idx}}" value="{{$v}}"/>
+        {{else}}
+        <input type="text" name="col_{{$idx}}" value="{{$v}}"/>
+        {{end}}
+        {{end}}
+        <input type="submit" value="Send" />
+    </form>
+    {{else}}
+        <p>Здесь ничего нет... пока что!</p>
+    {{end}}
+    
+</div>
+{{end}}

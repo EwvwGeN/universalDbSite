@@ -1,0 +1,6 @@
+# directories
+.vscode
+
+# files
+go.sum
+main

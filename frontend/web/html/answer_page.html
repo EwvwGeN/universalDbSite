@@ -1,0 +1,29 @@
+{{template "base" .}}
+
+{{define "title"}}{{ .Page_title}}{{end}}
+ 
+{{define "main"}}
+{{$title := .Page_title}}
+<div>
+    {{if .Answer.Data}}
+    
+    <table>
+        <tr>
+            {{range .Answer.Columns}}
+            <th>{{.}}</th>
+            {{end}}
+        </tr>
+        {{range $idx, $row := .Answer.Data}}
+        <tr>
+            {{range $row}}
+            <td>{{.}}</td>
+            {{end}}
+        </tr>
+        {{end}}
+    </table>
+    {{else}}
+        <p>Здесь ничего нет... пока что!</p>
+    {{end}}
+    
+</div>
+{{end}}

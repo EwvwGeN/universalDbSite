@@ -1,0 +1,7 @@
+api_host: "0.0.0.0"
+api_port: "8080"
+db_host: "0.0.0.0"
+db_port: "3306"
+db_user: "root"
+db_pass: "admin"
+db_name: "database"

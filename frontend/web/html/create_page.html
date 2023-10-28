@@ -1,0 +1,36 @@
+{{template "base" .}}
+
+{{define "title"}}{{ .Page_title}}{{end}}
+ 
+{{define "main"}}
+{{$title := .Page_title}}
+<div>
+    {{if .Record.Columns}}
+    {{$pk := .Record.PkCol}}
+    <h3>Create record for {{$title}}</h3>
+    <form method="POST">
+        {{range $idx, $v := .Record.Columns}}
+        {{$trigger := false}}
+
+            {{if index $pk $idx}}
+                {{$isAI := index (index $pk $idx) 1}}
+                {{if eq $isAI "1"}}
+                {{$trigger = true}}
+                {{end}}
+            {{end}}
+
+        {{if $trigger}}
+        <input type="hidden" name="col_{{$idx}}"/>
+        {{else}}
+        <label>{{$v}}</label>
+        <input type="text" name="col_{{$idx}}"/>
+        {{end}}
+        {{end}}
+        <input type="submit" value="Send" />
+    </form>
+    {{else}}
+        <p>Здесь ничего нет... пока что!</p>
+    {{end}}
+
+</div>
+{{end}}

@@ -1,0 +1,39 @@
+{{template "base" .}}
+
+{{define "title"}}{{ .Page_title}}{{end}}
+ 
+{{define "main"}}
+{{$title := .Page_title}}
+<div>
+    {{if .Table.Data}}
+    <nav class="row-create">
+        <a href="/tables/{{$title}}/create">CREATE</a>
+    </nav>
+    <div class="printed-table">
+        <table>
+            <tr>
+                {{range .Table.Columns}}
+                <th>{{.}}</th>
+                {{end}}
+            </tr>
+            {{$pk := .Table.PkCol}}
+            {{range $idx, $row := .Table.Data}}
+            <tr>
+                {{range $row}}
+                <td>{{.}}</td>
+                {{end}}
+                <td>
+                    <div class="row-action-buttons">
+                        <a href="/tables/{{$title}}/delete?{{range $pos, $value := $pk}}{{index $value 0}}={{ index $row $pos}}&{{end}}">DELETE</a>
+                        <a href="/tables/{{$title}}/update?{{range $pos, $value := $pk}}{{index $value 0}}={{ index $row $pos}}&{{end}}">UPDATE</a>
+                    </div>
+                </td>
+            </tr>
+            {{end}}
+        </table>
+    </div>
+    {{else}}
+        <p>Здесь ничего нет... пока что!</p>
+    {{end}}
+</div>
+{{end}}
